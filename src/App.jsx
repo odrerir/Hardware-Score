@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useEffect } from 'react';
 
-import { storageService } from './services/storageService';
+import { storageService } from './services/StorageService';
 
-import { PizzariaDetails } from './pages/PizzariaDetails';
+import { HardwareDetails } from './pages/HardwareDetails';
 import { Ranking } from './pages/Ranking';
 import { Home } from './pages/Home';
 import { NavBar } from './components/NavBar';
@@ -22,7 +22,7 @@ export function App() {
 
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/pizzaria/:id" element={<PizzariaDetails />} />
+        <Route path="/hardware/:id" element={<HardwareDetails />} />
         <Route path="/ranking" element={<Ranking />} />
         <Route path="/admin" element={<Admin />} />
       </Routes>

@@ -11,7 +11,7 @@ export function NavBar() {
           <Link to="/ranking" className={styles.navLink}>Ranking</Link>
         </div>
         <Link to="/admin" className={styles.addButton}>
-          Adicionar Pizzaria
+          Adicionar Hardware
         </Link>
       </div>
     </nav>

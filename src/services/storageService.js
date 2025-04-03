@@ -1,56 +1,56 @@
-import { initialPizzarias } from '../data/InitialData';
+import { initialHardwares } from '../data/InitialData';
 
-const STORAGE_KEY = 'pizzarias';
+const STORAGE_KEY = 'Hardwares';
 
 export const storageService = {
   // Inicializa o localStorage com dados mockados se estiver vazio
   initializeStorage: () => {
     const existingData = localStorage.getItem(STORAGE_KEY);
     if (!existingData) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(initialPizzarias));
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(initialHardware));
     }
   },
 
-  // Obtém todas as pizzarias
-  getPizzarias: () => {
+  // Obtém todas as pecas de Hardware
+  getHardware: () => {
     const data = localStorage.getItem(STORAGE_KEY);
     return JSON.parse(data || '[]');
   },
 
-  // Obtém uma pizzaria específica por ID
-  getPizzariaById: (id) => {
-    const pizzarias = storageService.getPizzarias();
-    return pizzarias.find(p => p.id === Number(id));
+  // Obtém uma Hardware específica por ID
+  getHardwareById: (id) => {
+    const Hardware = storageService.getHardware();
+    return Hardware.find(p => p.id === Number(id));
   },
 
-  // Adiciona uma nova pizzaria
-  addPizzaria: (pizzaria) => {
-    const pizzarias = storageService.getPizzarias();
-    const newPizzaria = {
-      ...pizzaria,
+  // Adiciona uma nova Hardware
+  addHardware: (Hardware) => {
+    const Hardware = storageService.getHardware();
+    const newHardware = {
+      ...Hardware,
       id: Date.now(), // Gera um ID único baseado no timestamp
     };
-    pizzarias.push(newPizzaria);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(pizzarias));
-    return newPizzaria;
+    Hardware.push(newHardware);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(Hardware));
+    return newHardware;
   },
 
-  // Atualiza uma pizzaria existente
-  updatePizzaria: (id, updatedData) => {
-    const pizzarias = storageService.getPizzarias();
-    const index = pizzarias.findIndex(p => p.id === Number(id));
+  // Atualiza um Hardware existente
+  updateHardware: (id, updatedData) => {
+    const Hardware = storageService.getHardware();
+    const index = Hardware.findIndex(p => p.id === Number(id));
     if (index !== -1) {
-      pizzarias[index] = { ...pizzarias[index], ...updatedData };
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(pizzarias));
-      return pizzarias[index];
+      Hardware[index] = { ...Hardware[index], ...updatedData };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(Hardware));
+      return Hardware[index];
     }
     return null;
   },
 
-  // Remove uma pizzaria
-  deletePizzaria: (id) => {
-    const pizzarias = storageService.getPizzarias();
-    const filteredPizzarias = pizzarias.filter(p => p.id !== Number(id));
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(filteredPizzarias));
+  // Remove um Hardware
+  deleteHardware: (id) => {
+    const Hardware = storageService.getHardware();
+    const filteredHardware = Hardware.filter(p => p.id !== Number(id));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(filteredHardware));
   }
 };

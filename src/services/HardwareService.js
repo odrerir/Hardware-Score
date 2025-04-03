@@ -1,4 +1,4 @@
-export const PizzariaService = {
+export const HardwareService = {
 
   calcularMediaAvaliacoes(avaliacao) {
     // Verifica se a avaliação é um objeto válido
@@ -14,7 +14,7 @@ export const PizzariaService = {
     return valores.reduce((a, b) => a + b, 0) / valores.length;
   },
 
-  adicionarPizzaria(formData) {
+  adicionarHardware(formData) {
     return new Promise((resolve) => {
       // Verifica se a estrutura de avaliação é válida
       if (!formData.avaliacao || typeof formData.avaliacao !== 'object') {
@@ -24,8 +24,8 @@ export const PizzariaService = {
       // Calcula a média das avaliações
       const mediaGeral = this.calcularMediaAvaliacoes(formData.avaliacao);
 
-      // Cria o objeto da nova pizzaria com ID único e ajusta os pontos fortes
-      const novaPizzaria = {
+      // Cria o objeto da nova peca com ID único e ajusta os pontos fortes
+      const novaHardware = {
         ...formData,
         id: Date.now(), // Gera um ID único baseado no timestamp
         mediaGeral,
@@ -35,14 +35,14 @@ export const PizzariaService = {
       };
 
       try {
-        // Obtém as pizzarias já salvas no localStorage
-        const pizzariasAtuais = JSON.parse(localStorage.getItem('pizzarias') || '[]');
+        // Obtém as Hardware já salvas no localStorage
+        const HardwaresAtuais = JSON.parse(localStorage.getItem('Hardware') || '[]');
 
-        // Adiciona a nova pizzaria e salva novamente no localStorage
-        localStorage.setItem('pizzarias', JSON.stringify([...pizzariasAtuais, novaPizzaria]));
+        // Adiciona a nova peca e salva novamente no localStorage
+        localStorage.setItem('Hardware', JSON.stringify([...HardwareAtuais, novaHardware]));
 
-        // Retorna a pizzaria criada
-        resolve(novaPizzaria);
+        // Retorna a Hardware criada
+        resolve(novaHardware);
       } catch (error) {
         // Retorna erro caso ocorra problema ao salvar os dados
         resolve({ error: 'Erro ao salvar no localStorage' });

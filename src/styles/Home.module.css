@@ -15,7 +15,7 @@
   padding-left: 1rem;
 }
 
-.pizzarias {
+.Hardware {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr)); /* Layout padrão */
   gap: 1.5rem; /* Espaçamento entre os cards */
@@ -24,13 +24,13 @@
 
 /* Ajuste para telas maiores */
 @media (min-width: 640px) {
-  .pizzarias {
+  .Hardware {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
 @media (min-width: 1024px) {
-  .pizzarias {
+  .Hardware {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }

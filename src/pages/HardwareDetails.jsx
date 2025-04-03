@@ -1,28 +1,28 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
-import { storageService } from '../services/storageService';
+import { storageService } from '../services/StorageService';
 import { RatingBar } from '../components/RatingBar';
 
-import styles from "../styles/PizzariaDetails.module.css";
+import styles from "../styles/HardwareDetails.module.css";
 
-export function PizzariaDetails() {
+export function HardwareDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [pizzaria, setPizzaria] = useState(null);
+  const [Hardware, setHardware] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     try {
-      const found = storageService.getPizzariaById(Number(id));
+      const found = storageService.getHardwareById(Number(id));
       if (found) {
-        setPizzaria(found);
+        setHardware(found);
       } else {
-        setError('Pizzaria não encontrada');
+        setError('Hardware não encontrada');
       }
     } catch (err) {
-      setError('Erro ao carregar os dados da pizzaria');
+      setError('Erro ao carregar os dados da Hardware');
     } finally {
       setLoading(false);
     }
@@ -56,27 +56,27 @@ export function PizzariaDetails() {
       </button>
 
       <div className={styles.card}>
-        <img src={pizzaria.imagem} alt={pizzaria.nome} className={styles.image} />
+        <img src={Hardware.imagem} alt={Hardware.nome} className={styles.image} />
 
         <div className={styles.content}>
           <div className={styles.header}>
-            <h1 className={styles.title}>{pizzaria.nome}</h1>
+            <h1 className={styles.title}>{Hardware.nome}</h1>
             <div className={styles.rating}>
-              <div className={styles.ratingNumber}>{pizzaria.mediaGeral.toFixed(1)}</div>
+              <div className={styles.ratingNumber}>{Hardware.mediaGeral.toFixed(1)}</div>
               <div className={styles.ratingText}>Média Geral</div>
             </div>
           </div>
 
-          <p className={styles.address}>{pizzaria.endereco}</p>
+          <p className={styles.address}>{Hardware.endereco}</p>
 
           <div className={styles.grid}>
             <div>
               <h2 className={styles.sectionTitle}>Avaliações</h2>
               <div className={styles.spaceY}>
-                <RatingBar label="Massa" value={pizzaria.avaliacao.massa} />
-                <RatingBar label="Recheio" value={pizzaria.avaliacao.recheio} />
-                <RatingBar label="Tempero" value={pizzaria.avaliacao.tempero} />
-                <RatingBar label="Preço" value={pizzaria.avaliacao.preco} />
+                <RatingBar label="Massa" value={Hardware.avaliacao.massa} />
+                <RatingBar label="Recheio" value={Hardware.avaliacao.recheio} />
+                <RatingBar label="Tempero" value={Hardware.avaliacao.tempero} />
+                <RatingBar label="Preço" value={Hardware.avaliacao.preco} />
               </div>
             </div>
 
@@ -85,17 +85,17 @@ export function PizzariaDetails() {
               <div className={styles.spaceY}>
                 <div>
                   <h3 className={styles.subTitle}>Descrição</h3>
-                  <p className={styles.text}>{pizzaria.descricao}</p>
+                  <p className={styles.text}>{Hardware.descricao}</p>
                 </div>
 
                 <div>
                   <h3 className={styles.subTitle}>Horário de Funcionamento</h3>
-                  <p className={styles.text}>{pizzaria.horarioFuncionamento}</p>
+                  <p className={styles.text}>{Hardware.horarioFuncionamento}</p>
                 </div>
 
                 <div>
                   <h3 className={styles.subTitle}>Contato</h3>
-                  <p className={styles.text}>{pizzaria.contato}</p>
+                  <p className={styles.text}>{Hardware.contato}</p>
                 </div>
 
                 <div>

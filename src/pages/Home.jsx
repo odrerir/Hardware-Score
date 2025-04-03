@@ -1,29 +1,29 @@
 import { useState, useEffect } from 'react';
 
-import {PizzariaCard} from '../components/PizzariaCard';
-import { storageService } from '../services/storageService';
+import {HardwareCard} from '../components/HardwareCard';
+import { storageService } from '../services/StorageService';
 
 import styles from "../styles/Home.module.css";
 
 export function Home() {
-  const [pizzarias, setPizzarias] = useState([]);
+  const [Hardware, setHardware] = useState([]);
 
   useEffect(() => {
-    // Carrega as pizzarias do localStorage
-    const loadedPizzarias = storageService.getPizzarias();
-    setPizzarias(loadedPizzarias);
+    // Carrega as pecas de Hardware do localStorage
+    const loadedHardware = storageService.getHardware();
+    setHardware(loadedHardware);
   }, []);
 
   return (
     <div>
       <header>
-        <h1 className={styles.titulo}>Pizzarias</h1>
+        <h1 className={styles.titulo}>Hardware</h1>
       </header>
-      <div className={styles.pizzarias}>
-        {pizzarias.map(pizzaria => (
-          <PizzariaCard
-            key={pizzaria.id}
-            pizzaria={pizzaria} />
+      <div className={styles.Hardware}>
+        {Hardware.map(Hardware => (
+          <HardwareCard
+            key={Hardware.id}
+            Hardware={Hardware} />
         ))}
       </div>
     </div>

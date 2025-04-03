@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { PizzariaService } from '../services/PizzariaService';
+import { HardwareService } from '../services/HardwareService';
 import styles from '../styles/Admin.module.css';
 
 export function Admin() {
@@ -9,14 +9,12 @@ export function Admin() {
   // Estado para armazenar os dados do formulário
   const [formData, setFormData] = useState({
     nome: '',
-    endereco: '',
     imagem: null,
     descricao: '',
     horarioDeFuncionamento: '',
     contato: '',
     pontosFortes: '',
-    avaliacao: { massa: '', recheio: '', tempero: '', preco: '' },
-    aplicativo: { ifood: false, rappi: false, uberEats: false, aiqFome: false, outro: false, nenhum: false }
+    avaliacao: { massa: '', recheio: '', tempero: '', preco: '' }
   });
 
   // Estado para armazenar mensagens de erro
@@ -106,7 +104,7 @@ export function Admin() {
     });
 
     try {
-      const response = await PizzariaService.adicionarPizzaria(data);
+      const response = await HardwareService.adicionarPizzaria(data);
       alert(response.success ? 'Pizzaria adicionada com sucesso!' : `Erro: ${response.error}`);
 
       // Se a pizzaria foi adicionada com sucesso, redireciona para a página inicial
@@ -154,26 +152,6 @@ export function Admin() {
                 </div>
               ))
             }
-          </div>
-
-          {/* Campo de Aplicativos */}
-          <div className={styles.formGroup}>
-            <label className={styles.label}>Aplicativos</label>
-            <div className={styles.aplicativoGroup}>
-              {Object.keys(formData.aplicativo).map(field => (
-                <div key={field} className={styles.formGroup}>
-                  <label className={styles.label}>
-                    {field.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}
-                  </label>
-                  <input
-                    type="checkbox"
-                    name={`aplicativo.${field}`}
-                    checked={formData.aplicativo[field]}
-                    onChange={handleChange}
-                  />
-                </div>
-              ))}
-            </div>
           </div>
 
           {/* Campos de Avaliação */}
