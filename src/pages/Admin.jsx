@@ -104,10 +104,10 @@ export function Admin() {
     });
 
     try {
-      const response = await HardwareService.adicionarPizzaria(data);
-      alert(response.success ? 'Pizzaria adicionada com sucesso!' : `Erro: ${response.error}`);
+      const response = await HardwareService.adicionarHardware(data);
+      alert(response.success ? 'Hardware adicionado com sucesso!' : `Erro: ${response.error}`);
 
-      // Se a pizzaria foi adicionada com sucesso, redireciona para a página inicial
+      // Se a peca foi adicionada com sucesso, redireciona para a página inicial
       if (response.success) navigate('/');
     } catch (error) {
       alert(`Erro ao enviar os dados: ${error.message}`);
@@ -116,7 +116,7 @@ export function Admin() {
 
   return (
       <div className={styles.form}>
-        <h1 className={styles.formHeader}>Adicionar Pizzaria</h1>
+        <h1 className={styles.formHeader}>Adicionar Hardware</h1>
         <form onSubmit={handleSubmit} className={styles.formContainer} encType="multipart/form-data">
 
           {/* Campo de Imagem */}
@@ -175,7 +175,7 @@ export function Admin() {
           </div>
 
           {/* Botão de Envio */}
-          <button type="submit" className={styles.submitBtn}>Adicionar Pizzaria</button>
+          <button type="submit" className={styles.submitBtn}>Adicionar Hardware</button>
         </form>
       </div>
   );

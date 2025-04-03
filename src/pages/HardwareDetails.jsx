@@ -101,7 +101,7 @@ export function HardwareDetails() {
                 <div>
                   <h3 className={styles.subTitle}>Pontos Fortes</h3>
                   <ul className={styles.list}>
-                    {pizzaria.pontosFortes.map((ponto, index) => (
+                    {Hardware.pontosFortes.map((ponto, index) => (
                       <li key={index}>{ponto}</li>
                     ))}
                   </ul>
@@ -109,18 +109,6 @@ export function HardwareDetails() {
               </div>
             </div>
           </div>
-
-          {/* Nova seção de aplicativos de delivery */}
-          {pizzaria.aplicativo && (
-            <div className={styles.aplicativoGroup}>
-              <h2 className={styles.sectionTitle}>Disponível em</h2>
-              <ul>
-                {pizzaria.aplicativo.ifood && <li>iFood</li>}
-                {pizzaria.aplicativo.rappi && <li>Rappi</li>}
-                {pizzaria.aplicativo.uberEats && <li>Uber Eats</li>}
-              </ul>
-            </div>
-          )}
 
         </div>
       </div>
