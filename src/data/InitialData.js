@@ -1,4 +1,4 @@
-export const initialHardware = [
+export const initialData = [
   {
     id: 1,
     nome: " i3 13100F 3.4GHz (4.5GHz Turbo), 13ª Geração",

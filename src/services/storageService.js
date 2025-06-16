@@ -1,4 +1,4 @@
-import { initialHardwares } from '../data/InitialData';
+import { initialData } from '../data/InitialData';
 
 const STORAGE_KEY = 'Hardwares';
 
@@ -7,7 +7,7 @@ export const storageService = {
   initializeStorage: () => {
     const existingData = localStorage.getItem(STORAGE_KEY);
     if (!existingData) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(initialHardware));
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(initialData));
     }
   },
 
@@ -25,7 +25,7 @@ export const storageService = {
 
   // Adiciona uma nova Hardware
   addHardware: (Hardware) => {
-    const Hardware = storageService.getHardware();
+    const Hardwares = storageService.getHardware();
     const newHardware = {
       ...Hardware,
       id: Date.now(), // Gera um ID único baseado no timestamp
