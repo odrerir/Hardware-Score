@@ -1,7 +1,7 @@
 export const initialData = [
   {
     id: 1,
-    nome: " i3 13100F 3.4GHz (4.5GHz Turbo), 13ª Geração",
+    nome: " i3 13ª Geração",
     imagem: "https://img.terabyteshop.com.br/produto/g/processador-intel-core-i3-13100f-34ghz-45ghz-turbo-13-geracao-4-cores-8-threads-lga-1700-bx8071513100f_159293.jpg",
     avaliacao: {
       massa: 4.5,

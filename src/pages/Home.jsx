@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 
 import {HardwareCard} from '../components/HardwareCard';
 import { storageService } from '../services/StorageService';
+import { Sidebar } from '../components/Sidebar';
 
 import styles from "../styles/Home.module.css";
 
@@ -15,15 +16,17 @@ export function Home() {
   }, []);
 
   return (
-    <div>
-      <header>
-        <h1 className={styles.titulo}>Hardware</h1>
-      </header>
+    <div className={styles.Wrapper}>
+      <Sidebar>
+          sidebar
+      </Sidebar>
+
       <div className={styles.Hardware}>
         {Hardware.map(Hardware => (
           <HardwareCard
             key={Hardware.id}
-            Hardware={Hardware} />
+            Hardware={Hardware}
+          />
         ))}
       </div>
     </div>

@@ -1,29 +1,20 @@
 :root {
-  --white: #fff;
-  --gray-100: #e1e1e6;
-  --gray-300: #c4c4cc;
-  --gray-400: #8d8d99;
-  --gray-600: #323238;
-  --gray-700: #29292e;
-  --gray-800: #202024;
-  --gray-900: #121214;
+  --white: #F5F5F5;
+  --blue-100: #2F4652;
 
-  --red-500: #F75A68;
+  --green-100: #9CCCB4;
+  --green-200: #84B29B;
+
 }
 
 * {
   margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 
 body {
   background: var(--white);
-  color: var(--gray-900);
   margin: 0;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 400;
-  font-size: 1rem;
 }
 
 code {
@@ -32,7 +23,9 @@ code {
 
 /* Estilo do corpo e links gerais */
 body, input, textarea, button {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Outfit", sans-serif;
+  font-optical-sizing: auto;
   font-weight: 400;
   font-size: 1rem;
+  color: var(--blue-100);
 }

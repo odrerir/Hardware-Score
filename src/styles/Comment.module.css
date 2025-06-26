@@ -1,0 +1,41 @@
+/* Toda a Area de comentarios */
+.comment{
+    margin-top: 1.5rem;
+    display: flex;
+    gap: 1rem;
+    background-color: var(--green-100);
+}
+
+/* Bloco que engloba o comentario e o botao de curtida */
+.commentBox{
+    flex: 1;
+    height: 10%;
+    width: 10%;
+}
+
+/* Bloco que engloba o comentario */
+.commentContent{
+    background: var(--white);
+    border-radius: 20px;
+    padding: 1rem;
+}
+
+/* Area do comentario */
+.commentContent header{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+/* Nome do author do comentario */
+.authorAndTime strong{
+    display: block;
+    font-size: 0.875rem;
+    line-height: 1.6;
+}
+
+/* Escrita do comentario */
+.commentContent p{
+    margin-top: 1rem;
+    color: var(--gray-300);
+}

@@ -3,6 +3,10 @@ import { useState, useEffect } from 'react';
 
 import { storageService } from '../services/StorageService';
 import { RatingBar } from '../components/RatingBar';
+import { Comment } from '../components/Comment';
+
+import enviarIcon from '../assets/icons/Enviar.png';
+
 
 import styles from "../styles/HardwareDetails.module.css";
 
@@ -50,68 +54,59 @@ export function HardwareDetails() {
   }
 
   return (
-    <div className={styles.container}>
-      <button onClick={() => navigate(-1)} className={styles.goBack}>
-        ← Voltar
-      </button>
+    <div className={styles.wrapper}>
+      <div className={styles.avaliation}>
 
-      <div className={styles.card}>
-        <img src={Hardware.imagem} alt={Hardware.nome} className={styles.image} />
+        <h1 className={styles.title}>{Hardware.nome}</h1>
+        <img src={Hardware.imagem} alt={Hardware.nome} className={styles.imagem} />
 
-        <div className={styles.content}>
-          <div className={styles.header}>
-            <h1 className={styles.title}>{Hardware.nome}</h1>
-            <div className={styles.rating}>
-              <div className={styles.ratingNumber}>{Hardware.mediaGeral.toFixed(1)}</div>
-              <div className={styles.ratingText}>Média Geral</div>
-            </div>
+        <div className={styles.ratingContainer}>
+          <RatingBar value={Hardware.mediaGeral} />
+        </div>
+
+      </div>
+
+      <div className={styles.content}>
+        <div className={styles.header}>
+
+          <div className={styles.rating}>
+            <div className={styles.ratingNumber}>{Hardware.mediaGeral.toFixed(1)}</div>
+            <div className={styles.ratingText}>Média Geral</div>
           </div>
+        </div>
 
-          <p className={styles.address}>{Hardware.endereco}</p>
 
-          <div className={styles.grid}>
-            <div>
-              <h2 className={styles.sectionTitle}>Avaliações</h2>
-              <div className={styles.spaceY}>
-                <RatingBar label="Massa" value={Hardware.avaliacao.massa} />
-                <RatingBar label="Recheio" value={Hardware.avaliacao.recheio} />
-                <RatingBar label="Tempero" value={Hardware.avaliacao.tempero} />
-                <RatingBar label="Preço" value={Hardware.avaliacao.preco} />
-              </div>
-            </div>
+        <div className={styles.Information}>
+          <h2 className={styles.sectionTitle}>Informações</h2>
 
-            <div>
-              <h2 className={styles.sectionTitle}>Informações</h2>
-              <div className={styles.spaceY}>
-                <div>
-                  <h3 className={styles.subTitle}>Descrição</h3>
-                  <p className={styles.text}>{Hardware.descricao}</p>
-                </div>
-
-                <div>
-                  <h3 className={styles.subTitle}>Horário de Funcionamento</h3>
-                  <p className={styles.text}>{Hardware.horarioFuncionamento}</p>
-                </div>
-
-                <div>
-                  <h3 className={styles.subTitle}>Contato</h3>
-                  <p className={styles.text}>{Hardware.contato}</p>
-                </div>
-
-                <div>
-                  <h3 className={styles.subTitle}>Pontos Fortes</h3>
-                  <ul className={styles.list}>
-                    {Hardware.pontosFortes.map((ponto, index) => (
-                      <li key={index}>{ponto}</li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </div>
+          <div>
+            <h3 className={styles.subTitle}>Descrição</h3>
+            <p className={styles.text}>{Hardware.descricao}</p>
           </div>
 
         </div>
       </div>
+
+      <div className={styles.comments}>
+        <h2 className={styles.sectionTitle}>Comentários</h2>
+
+        <div className={styles.commentList}>
+          <Comment />
+          <Comment />
+
+          <form className={styles.commentForm}>
+
+            <div className={styles.textareaWrapper}>
+              <textarea placeholder="Deixe seu comentário" />
+
+              <button type="submit">
+                <img src={enviarIcon} alt="Enviar" />
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
     </div>
   );
 }
