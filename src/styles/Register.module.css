@@ -1,0 +1,108 @@
+.Register {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: var(--green-100);
+}
+
+.Titulo {
+  display: flex;
+  font-family: "Pathway Gothic One", sans-serif;
+  font-size: 6rem;
+  color: var(--white);
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.Slogan {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  gap: 0.5rem;
+}
+
+.Slogan span {
+  font-size: 2rem;
+  color: var(--white);
+}
+
+.registerForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  background-color: var(--white);
+  padding: 2rem;
+  border-radius: 50px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 40.625rem;
+  height: auto;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.formGroup label {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.formGroup input {
+  padding: 0.75rem;
+  background-color: #FFFFFF;
+  border-radius: 20px;
+  font-size: 1rem;
+  border: none;
+  box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.25);
+  width: 30rem;
+}
+
+.registerForm span {
+  margin-top: 0.5rem;
+}
+
+.registerForm span a {
+  color: var(--blue-100);
+}
+
+.registerForm span a:hover {
+  color: var(--blue-200);
+  text-decoration: underline;
+}
+
+.submitBtn {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: var(--blue-100);
+  color: white;
+  text-decoration: none;
+  border: none;
+  width: 18.75rem;
+  height: 3.75rem;
+  box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  font-size: 2rem;
+  cursor: pointer;
+  transform: 0.2s;
+}
+
+.submitBtn:hover {
+  background-color: var(--blue-200);
+  transform: scale(1.02);
+}
+
+.error {
+  color: red;
+  font-style: bold;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}

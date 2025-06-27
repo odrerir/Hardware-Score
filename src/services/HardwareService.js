@@ -1,33 +1,22 @@
 export const HardwareService = {
-
   calcularMediaAvaliacoes(avaliacao) {
-    // Verifica se a avaliação é um objeto válido
     if (!avaliacao || typeof avaliacao !== 'object') return 0;
-
-    // Converte os valores para números e remove valores inválidos (NaN)
     const valores = Object.values(avaliacao).map(Number).filter(v => !isNaN(v));
-
-    // Retorna 0 se não houver valores válidos para evitar divisão por zero
     if (valores.length === 0) return 0;
-
-    // Calcula e retorna a média das avaliações
     return valores.reduce((a, b) => a + b, 0) / valores.length;
   },
 
   adicionarHardware(formData) {
     return new Promise((resolve) => {
-      // Verifica se a estrutura de avaliação é válida
       if (!formData.avaliacao || typeof formData.avaliacao !== 'object') {
         return resolve({ error: 'Avaliação inválida' });
       }
 
-      // Calcula a média das avaliações
       const mediaGeral = this.calcularMediaAvaliacoes(formData.avaliacao);
 
-      // Cria o objeto da nova peca com ID único e ajusta os pontos fortes
       const novaHardware = {
         ...formData,
-        id: Date.now(), // Gera um ID único baseado no timestamp
+        id: Date.now(),
         mediaGeral,
         pontosFortes: formData.pontosFortes
           ? formData.pontosFortes.split(',').map(ponto => ponto.trim())
@@ -35,18 +24,12 @@ export const HardwareService = {
       };
 
       try {
-        // Obtém as Hardware já salvas no localStorage
         const HardwaresAtuais = JSON.parse(localStorage.getItem('Hardware') || '[]');
-
-        // Adiciona a nova peca e salva novamente no localStorage
-        localStorage.setItem('Hardware', JSON.stringify([...HardwareAtuais, novaHardware]));
-
-        // Retorna a Hardware criada
+        localStorage.setItem('Hardware', JSON.stringify([...HardwaresAtuais, novaHardware]));
         resolve(novaHardware);
       } catch (error) {
-        // Retorna erro caso ocorra problema ao salvar os dados
         resolve({ error: 'Erro ao salvar no localStorage' });
       }
     });
-  }
+  },
 };

@@ -11,13 +11,14 @@
 
   justify-content: space-between;
   align-items: center;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .Titulo {
   display: flex;
   font-family: "Pathway Gothic One", sans-serif;
   font-size: 4rem; /* 96px */
-  color: var(--white--100);
+  color: var(--white);
 
   justify-content: center;
   align-items: center;
@@ -32,6 +33,7 @@
   gap: 0.5rem;
   font-size: 1.5rem;
   text-decoration: none;
+  cursor: pointer;
 }
 
 /* Estilo para os links da navbar */
@@ -81,6 +83,56 @@
 .imagemPerfil {
   width: 2.75rem;
   height: 2.75rem;
+  cursor: pointer;
+}
+
+.dropdownContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+.dropdownMenu {
+  background: var(--green-100);
+  border: 1px solid var(--green-200);
+  position: absolute;
+  right: 0;
+  top: 8.4375rem;
+  z-index: 10;
+  box-shadow: 4px 4px 4px rgba(0,0,0,0.25);
+
+  border-bottom-left-radius: 30px;
+  border-top-left-radius: 30px;
+  width: 20.3125rem;
+  height: 11.25rem;
+  padding: 0.5rem;
+}
+
+.dropdownMenu img{
+  margin-left: 0.2rem;
+  height: 1rem;
+  width: 1rem;
+}
+
+.dropdownItem {
+  padding: 0.5rem;
+  display: flex;
+  width: 100%;
+
+  color: var(--white);
+  text-decoration: none;
+  font-size: 20px;
+
+  background: transparent;
+  border: none;
+  align-items: center;
+  text-align: left;
+  cursor: pointer;
+}
+
+.itemText{
+  color: var(--blue-100);
+  margin-left: 0.5rem;
 }
 
 @media (max-width: 768px) {

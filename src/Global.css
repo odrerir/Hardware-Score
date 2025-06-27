@@ -1,15 +1,22 @@
 :root {
   --white: #F5F5F5;
   --blue-100: #2F4652;
+  --blue-200: #446474;
 
   --green-100: #9CCCB4;
   --green-200: #84B29B;
+  --green-300: #5d8d7a;
 
 }
 
 * {
   margin: 0;
   box-sizing: border-box;
+}
+
+:focus{
+    outline: transparent;
+    box-shadow: 0 0 0 2px var(--green-300);
 }
 
 body {

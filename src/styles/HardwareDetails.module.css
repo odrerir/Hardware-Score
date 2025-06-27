@@ -2,18 +2,18 @@
 .wrapper {
   display: grid;
   grid-template-columns: 33.5rem 26.4375rem 1fr;
-  padding-top: 3.25rem;
+  padding-top: 1rem;
   min-height: 100vh;
 }
 
 /* IMAGEM DA PECA */
 .imagem {
-  width: 28.125rem;
-  height: 26.25rem;
+  width: 24rem;
+  height: 24rem;
   object-fit: cover;
   border-radius: 20px;
   box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.20);
-  margin-top: 2.0625rem;
+  margin-top: 1rem;
 }
 
 .avaliation {
@@ -27,18 +27,56 @@
 /* CONTEÚDO DO CARD */
 .content {
   padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-self: flex-start;
+  margin-top: 6rem;
+  gap: 1rem;
 }
 
+.rating{
+  display: flex;
+  flex-direction: row;
+}
+.header{
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.ratingNumber {
+  font-size: 1.5rem; /* Text-2xl */
+  font-weight: bold;
+  display: flex;
+  align-items: flex-end;
+
+}
+.ratingNumber img {
+  width: 2rem;
+  height: 2rem;
+}
+
+.ratingText {
+  font-size: 1.5rem; /* Text-base */
+  margin-top: 0.25rem;
+}
+
+.infoList{
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.infoItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
 /* MÉDIA DE AVALIAÇÃO */
 .ratingContainer {
   text-align: center;
   margin-top: 2.125rem;
   margin-bottom: 4.5625rem;
-
-  background-color: var(--green-100);
-  padding: 0.5rem;
-  border-radius: 10px;
-  box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.20);
 }
 
 .sectionTitle {
@@ -47,11 +85,9 @@
   margin-bottom: 0.5rem;
 }
 
-.comment {
-  margin-top: 1.5rem;
-  display: flex;
-  background-color: var(--green-100);
-  gap: 1rem;
+.comments {
+  overflow-y: auto;
+  height: 100%;
 }
 
 .commentList {
@@ -59,6 +95,7 @@
     border-top-left-radius: 20px;
     background-color: var(--green-100);
     padding: 0.5rem;
+    overflow: auto;
 }
 
 /* Formulário de comentário */
@@ -95,8 +132,7 @@
   color: var(--gray-100);
   line-height: 1.4;
   font-size: 0.95rem;
-  min-width: none;
-  min-height: none;
+  outline-color: var(--blue-100);
 }
 
 /* Botão de envio sobreposto */

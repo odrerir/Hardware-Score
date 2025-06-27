@@ -3,7 +3,7 @@ import { initialData } from '../data/InitialData';
 const STORAGE_KEY = 'Hardwares';
 
 export const storageService = {
-  // Inicializa o localStorage com dados mockados se estiver vazio
+  // Inicializa o localStorage com os dados iniciais
   initializeStorage: () => {
     const existingData = localStorage.getItem(STORAGE_KEY);
     if (!existingData) {
@@ -11,46 +11,51 @@ export const storageService = {
     }
   },
 
-  // Obtém todas as pecas de Hardware
+  // Reseta o localStorage com os dados iniciais
+  resetStorage: () => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(initialData));
+  },
+
+  // Obtém todos os hardwares
   getHardware: () => {
     const data = localStorage.getItem(STORAGE_KEY);
     return JSON.parse(data || '[]');
   },
 
-  // Obtém uma Hardware específica por ID
+  // Obtém um hardware específico por ID
   getHardwareById: (id) => {
-    const Hardware = storageService.getHardware();
-    return Hardware.find(p => p.id === Number(id));
+    const hardwares = storageService.getHardware();
+    return hardwares.find(hw => hw.id === Number(id));
   },
 
-  // Adiciona uma nova Hardware
-  addHardware: (Hardware) => {
-    const Hardwares = storageService.getHardware();
+  // Adiciona um novo hardware
+  addHardware: (hardware) => {
+    const hardwares = storageService.getHardware();
     const newHardware = {
-      ...Hardware,
-      id: Date.now(), // Gera um ID único baseado no timestamp
+      ...hardware,
+      id: Date.now(),
     };
-    Hardware.push(newHardware);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(Hardware));
+    const updatedList = [...hardwares, newHardware];
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedList));
     return newHardware;
   },
 
-  // Atualiza um Hardware existente
+  // Atualiza um hardware existente
   updateHardware: (id, updatedData) => {
-    const Hardware = storageService.getHardware();
-    const index = Hardware.findIndex(p => p.id === Number(id));
+    const hardwares = storageService.getHardware();
+    const index = hardwares.findIndex(hw => hw.id === Number(id));
     if (index !== -1) {
-      Hardware[index] = { ...Hardware[index], ...updatedData };
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(Hardware));
-      return Hardware[index];
+      hardwares[index] = { ...hardwares[index], ...updatedData };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(hardwares));
+      return hardwares[index];
     }
     return null;
   },
 
-  // Remove um Hardware
+  // Remove um hardware
   deleteHardware: (id) => {
-    const Hardware = storageService.getHardware();
-    const filteredHardware = Hardware.filter(p => p.id !== Number(id));
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(filteredHardware));
+    const hardwares = storageService.getHardware();
+    const updatedList = hardwares.filter(hw => hw.id !== Number(id));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedList));
   }
 };

@@ -5,7 +5,8 @@ import { storageService } from '../services/StorageService';
 import { RatingBar } from '../components/RatingBar';
 import { Comment } from '../components/Comment';
 
-import enviarIcon from '../assets/icons/Enviar.png';
+import sendIcon from '../assets/icons/send.svg';
+import starHalf from '../assets/icons/star-half.svg';
 
 
 import styles from "../styles/HardwareDetails.module.css";
@@ -22,6 +23,7 @@ export function HardwareDetails() {
       const found = storageService.getHardwareById(Number(id));
       if (found) {
         setHardware(found);
+        console.log('Hardware carregado:', found);
       } else {
         setError('Hardware não encontrada');
       }
@@ -68,22 +70,43 @@ export function HardwareDetails() {
 
       <div className={styles.content}>
         <div className={styles.header}>
+          <div className={styles.ratingText}>Média Geral</div>
 
-          <div className={styles.rating}>
-            <div className={styles.ratingNumber}>{Hardware.mediaGeral.toFixed(1)}</div>
-            <div className={styles.ratingText}>Média Geral</div>
-          </div>
+            <div className={styles.ratingNumber}>
+              <div >{Hardware.mediaGeral.toFixed(1)}</div>
+              <img src={starHalf} />
+            </div>
         </div>
 
 
-        <div className={styles.Information}>
+        <div className={styles.information}>
           <h2 className={styles.sectionTitle}>Informações</h2>
-
-          <div>
-            <h3 className={styles.subTitle}>Descrição</h3>
-            <p className={styles.text}>{Hardware.descricao}</p>
+          <div className={styles.infoList}>
+            <div className={styles.infoItem}>
+              <span className={styles.label}>Core/Threads:</span>
+              <span className={styles.value}>{Hardware.cores}</span>
+            </div>
+            <div className={styles.infoItem}>
+              <span className={styles.label}>Clock:</span>
+              <span className={styles.value}>{Hardware.clock}</span>
+            </div>
+            <div className={styles.infoItem}>
+              <span className={styles.label}>TDP:</span>
+              <span className={styles.value}>{Hardware.tdp}</span>
+            </div>
+            <div className={styles.infoItem}>
+              <span className={styles.label}>Lançamento:</span>
+              <span className={styles.value}>{Hardware.released}</span>
+            </div>
+            <div className={styles.infoItem}>
+              <span className={styles.label}>Fabricante:</span>
+              <span className={styles.value}>{Hardware.manufactor}</span>
+            </div>
+            <div className={styles.infoItem}>
+              <span className={styles.label}>Tipo:</span>
+              <span className={styles.value}>{Hardware.type}</span>
+            </div>
           </div>
-
         </div>
       </div>
 
@@ -100,7 +123,7 @@ export function HardwareDetails() {
               <textarea placeholder="Deixe seu comentário" />
 
               <button type="submit">
-                <img src={enviarIcon} alt="Enviar" />
+                <img src={sendIcon} alt="Enviar" />
               </button>
             </div>
           </form>
