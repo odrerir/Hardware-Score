@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import {HardwareCard} from '../components/HardwareCard';
+import { HardwareCard } from '../components/HardwareCard';
 import { storageService } from '../services/StorageService';
 import { Sidebar } from '../components/Sidebar';
 
@@ -9,29 +9,39 @@ import heart from '../assets/icons/heart.svg';
 import styles from "../styles/MyFavorites.module.css";
 
 export function MyFavorites() {
-  const [Hardware, setHardware] = useState([]);
+  const [favoritos, setFavoritos] = useState([]);
 
   useEffect(() => {
-    // Carrega as pecas de Hardware do localStorage
-    const loadedHardware = storageService.getHardware();
-    setHardware(loadedHardware);
+    const allHardware = storageService.getHardware();             // Todos os hardwares
+    const favoritosIds = storageService.getFavoritos();           // IDs dos favoritos
+
+    // Filtra os hardwares que estão nos favoritos
+    const favoritosData = allHardware.filter(hw =>
+      favoritosIds.includes(hw.id)
+    );
+
+    setFavoritos(favoritosData);
   }, []);
 
   return (
     <div className={styles.Wrapper}>
       <Sidebar>
-          sidebar
+        sidebar
       </Sidebar>
 
       <div className={styles.listProducts}>
-        <h1>Meus Favoritos <img src={heart} alt="Coracao" /></h1>
+        <h1>
+          Meus Favoritos <img src={heart} alt="Coração" />
+        </h1>
+
         <div className={styles.Hardware}>
-          {Hardware.map(Hardware => (
-            <HardwareCard
-              key={Hardware.id}
-              Hardware={Hardware}
-            />
-          ))}
+          {favoritos.length > 0 ? (
+            favoritos.map(hw => (
+              <HardwareCard key={hw.id} Hardware={hw} />
+            ))
+          ) : (
+            <p>Nenhum hardware favoritado ainda.</p>
+          )}
         </div>
       </div>
     </div>

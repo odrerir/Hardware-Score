@@ -1,16 +1,26 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-import star from '../assets/icons/star.svg';         // Estrela vazia
-import starFill from '../assets/Icons/star-fill.svg'; // Estrela cheia
+import { storageService } from "../services/StorageService";
+
+import star from '../assets/icons/star.svg';          // Estrela vazia
+import starFill from '../assets/icons/star-fill.svg'; // Estrela cheia
 import heart from '../assets/icons/heart.svg';        // Coração vazio
 import heartFill from '../assets/icons/heart-fill.svg'; // Coração cheio
 
-export function RatingBar({ label, value = 0 }) {
-  const [rating, setRating] = useState(value);        // estado da nota
+export function RatingBar({ value = 0, id }) {
+  const [rating, setRating] = useState(value);        // nota exibida
   const [hover, setHover] = useState(0);              // destaque ao passar o mouse
-  const [favorited, setFavorited] = useState(false);  // coração clicado
+  const [favorited, setFavorited] = useState(false);  // estado do coração
 
-  // função para renderizar as 5 estrelas com clique
+  // Checa se é favorito ao carregar
+  useEffect(() => {
+    if (id !== undefined) {
+      const isFav = storageService.isFavorito(Number(id));
+      setFavorited(isFav);
+    }
+  }, [id]);
+
+  // Estrelas de avaliação
   const renderStars = () => {
     return [1, 2, 3, 4, 5].map((i) => {
       const isFilled = i <= (hover || rating);
@@ -20,9 +30,9 @@ export function RatingBar({ label, value = 0 }) {
           src={isFilled ? starFill : star}
           alt={`Estrela ${i}`}
           style={{
-            cursor: "pointer" ,
-             width: '2rem',
-             height: '2rem',
+            cursor: "pointer",
+            width: '2rem',
+            height: '2rem',
           }}
           onClick={() => setRating(i)}
           onMouseEnter={() => setHover(i)}
@@ -43,12 +53,11 @@ export function RatingBar({ label, value = 0 }) {
         {renderStars()}
       </div>
 
-      {/* Média numérica */}
       <span style={{ fontWeight: 'bold', fontSize: '1.5rem' }}>
         {rating.toFixed(1)}
       </span>
 
-      {/* Coração favorito */}
+      {/* Coração de favorito */}
       <img
         src={favorited ? heartFill : heart}
         alt="Favorito"
@@ -57,7 +66,10 @@ export function RatingBar({ label, value = 0 }) {
           height: '2rem',
           cursor: "pointer",
         }}
-        onClick={() => setFavorited(!favorited)}
+        onClick={() => {
+          const novoEstado = storageService.toggleFavorito(Number(id));
+          setFavorited(novoEstado);
+        }}
       />
     </div>
   );

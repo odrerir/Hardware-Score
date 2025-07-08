@@ -33,6 +33,7 @@ function AppRoutes() {
 
 export function App() {
   useEffect(() => {
+    storageService.resetUsuarios();
     storageService.resetStorage();
     storageService.initializeStorage();
   }, []);

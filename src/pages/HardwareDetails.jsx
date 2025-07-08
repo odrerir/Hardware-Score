@@ -7,7 +7,8 @@ import { Comment } from '../components/Comment';
 
 import sendIcon from '../assets/icons/send.svg';
 import starHalf from '../assets/icons/star-half.svg';
-
+import heart from '../assets/icons/heart.svg';
+import heartFill from '../assets/icons/heart-fill.svg';
 
 import styles from "../styles/HardwareDetails.module.css";
 
@@ -15,20 +16,26 @@ export function HardwareDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [Hardware, setHardware] = useState(null);
+  const [favorited, setFavorited] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [comentario, setComentario] = useState('');
+  const [comentarios, setComentarios] = useState([]);
+
 
   useEffect(() => {
     try {
       const found = storageService.getHardwareById(Number(id));
       if (found) {
         setHardware(found);
-        console.log('Hardware carregado:', found);
+        setComentarios(found.comentarios || []);
+        const isFav = storageService.isFavorito(Number(id));
+        setFavorited(isFav);
       } else {
-        setError('Hardware não encontrada');
+        setError('Hardware não encontrado');
       }
     } catch (err) {
-      setError('Erro ao carregar os dados da Hardware');
+      setError('Erro ao carregar os dados do hardware');
     } finally {
       setLoading(false);
     }
@@ -58,26 +65,24 @@ export function HardwareDetails() {
   return (
     <div className={styles.wrapper}>
       <div className={styles.avaliation}>
-
         <h1 className={styles.title}>{Hardware.nome}</h1>
+
         <img src={Hardware.imagem} alt={Hardware.nome} className={styles.imagem} />
 
         <div className={styles.ratingContainer}>
-          <RatingBar value={Hardware.mediaGeral} />
+          <RatingBar value={Hardware.mediaGeral} id={Hardware.id} />
         </div>
-
       </div>
 
       <div className={styles.content}>
         <div className={styles.header}>
           <div className={styles.ratingText}>Média Geral</div>
+          <div className={styles.ratingNumber}>
+            <div>{Hardware.mediaGeral.toFixed(1)}</div>
+            <img src={starHalf} alt="Estrela" />
+          </div>
 
-            <div className={styles.ratingNumber}>
-              <div >{Hardware.mediaGeral.toFixed(1)}</div>
-              <img src={starHalf} />
-            </div>
         </div>
-
 
         <div className={styles.information}>
           <h2 className={styles.sectionTitle}>Informações</h2>
@@ -114,14 +119,40 @@ export function HardwareDetails() {
         <h2 className={styles.sectionTitle}>Comentários</h2>
 
         <div className={styles.commentList}>
-          <Comment />
-          <Comment />
+          {comentarios.length === 0 ? (
+            <p className={styles.noComment}>Nenhum comentário ainda.</p>
+          ) : (
+            comentarios.map((c, index) => (
+              <Comment key={index} texto={c.texto} />
+            ))
+          )}
 
-          <form className={styles.commentForm}>
 
+          <form
+            className={styles.commentForm}
+            onSubmit={(e) => {
+              e.preventDefault();
+
+              if (comentario.trim() === '') return;
+
+              const novoComentario = {
+                texto: comentario.trim(),
+                data: new Date().toLocaleString(),
+              };
+
+              const sucesso = storageService.adicionarComentario(Number(id), novoComentario);
+              if (sucesso) {
+                setComentarios(prev => [...prev, novoComentario]);
+                setComentario('');
+              }
+            }}
+          >
             <div className={styles.textareaWrapper}>
-              <textarea placeholder="Deixe seu comentário" />
-
+              <textarea
+                placeholder="Deixe seu comentário"
+                value={comentario}
+                onChange={(e) => setComentario(e.target.value)}
+              />
               <button type="submit">
                 <img src={sendIcon} alt="Enviar" />
               </button>
@@ -129,7 +160,6 @@ export function HardwareDetails() {
           </form>
         </div>
       </div>
-
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import { initialData } from '../data/InitialData';
 
 const STORAGE_KEY = 'Hardwares';
+const FAVORITOS_KEY = 'Favoritos';
 
 export const storageService = {
   // Inicializa o localStorage com os dados iniciais
@@ -14,6 +15,12 @@ export const storageService = {
   // Reseta o localStorage com os dados iniciais
   resetStorage: () => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(initialData));
+    localStorage.removeItem(FAVORITOS_KEY);
+  },
+  
+  resetUsuarios() {
+    localStorage.removeItem('usuarios');
+    localStorage.removeItem('usuarioLogado');
   },
 
   // Obtém todos os hardwares
@@ -57,5 +64,48 @@ export const storageService = {
     const hardwares = storageService.getHardware();
     const updatedList = hardwares.filter(hw => hw.id !== Number(id));
     localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedList));
+  },
+
+  // FAVORITOS
+  toggleFavorito: (hardwareId) => {
+    const favoritos = JSON.parse(localStorage.getItem(FAVORITOS_KEY) || '[]');
+    const existe = favoritos.includes(hardwareId);
+
+    const atualizados = existe
+      ? favoritos.filter(id => id !== hardwareId)
+      : [...favoritos, hardwareId];
+
+    localStorage.setItem(FAVORITOS_KEY, JSON.stringify(atualizados));
+    return !existe;
+  },
+
+  isFavorito: (hardwareId) => {
+    const favoritos = JSON.parse(localStorage.getItem(FAVORITOS_KEY) || '[]');
+    return favoritos.includes(hardwareId);
+  },
+
+  getFavoritos: () => {
+    return JSON.parse(localStorage.getItem(FAVORITOS_KEY) || '[]');
+  },
+
+  adicionarComentario: (hardwareId, comentario) => {
+    const hardwares = storageService.getHardware();
+    const index = hardwares.findIndex(hw => hw.id === Number(hardwareId));
+
+    if (index !== -1) {
+      const hw = hardwares[index];
+
+      if (!hw.comentarios) {
+        hw.comentarios = [];
+      }
+
+      hw.comentarios.push(comentario);
+
+      localStorage.setItem('Hardwares', JSON.stringify(hardwares));
+      return true;
+    }
+
+    return false;
   }
+
 };
